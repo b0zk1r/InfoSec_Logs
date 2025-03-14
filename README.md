@@ -1,4 +1,4 @@
-# InfoSec_Logs
+# README.md
 InfoSec studies of mine
 
 This repository serves as a collection of resources, notes, and hands-on exercises related to various aspects of Information Security.
