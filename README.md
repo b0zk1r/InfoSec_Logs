@@ -74,12 +74,49 @@ This repository serves as a collection of resources, notes, and hands-on exercis
     - WinRM
       - Basics
       - Exploiting WinRM
-- **Web Application Security**
-  - OWASP Top 10 Vulnerabilities
-  - SQL Injection, XSS, CSRF, and More
-- **Penetration Testing & Ethical Hacking**
-  - Kali Linux & Penetration Testing Tools
-  - Metasploit Framework & Exploits
+- **Exploitation II**
+  - Basics
+  - Black Box Pentest
+    - Linux
+      - PHP
+      - SAMBA
+      - VSFTPD II
+    - Windows
+      - phpMyAdmin
+      - PsExec
+    - Basics
+    - Enumeration
+  - Exploits
+    - Compiling Exploits
+    - Fixing Exploits
+    - Public Exploits
+    - SearchSploit
+  - Frameworks
+    - MSF
+    - PowerShell-Empire
+  - Obfuscation
+    - Basics
+    - PowerShellCode
+    - Shellter
+  - Shells
+    - Bind Shells
+    - Netcat
+    - Reverse Shells
+  - Vulnerability Scanning
+    - Banner Grabbing
+    - Metasploit
+    - NSE
+- **Metasploit Framework**
+  - Armitage
+  - Enumeration
+  - Fundamentals
+  - Linux
+  - NMAP MSF
+  - Overview
+  - Payloads
+  - Post Exploitation
+  - Vulnerability Scanning
+  - Windows
 - **Cryptography**
   - Symmetric & Asymmetric Encryption
   - Hashing Algorithms & Digital Signatures
