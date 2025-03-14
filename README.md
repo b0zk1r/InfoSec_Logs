@@ -6,7 +6,7 @@ This repository serves as a collection of resources, notes, and hands-on exercis
 ## Topics Covered
 
 - **Assessment Methodologies**
-  - Auditing Fundamentals
+  - *Auditing Fundamentals*
     -Audit Guide
     -Basics
     -Compliance
