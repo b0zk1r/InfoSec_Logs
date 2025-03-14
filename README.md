@@ -217,7 +217,7 @@ This repository serves as a collection of resources, notes, and hands-on exercis
 - **Social Engineering**
   - Fundamentals
   - GoPhis
-- **WAPT**
+- **WAPT (Vulnerability Assessment and Penetration Testing)**
   - BurpSuite
   - Gobuster
   - HTTP Methods
