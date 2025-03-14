@@ -263,10 +263,11 @@ Here are some of the key resources referenced in this repository:
 - [HackerOne Bug Bounty Platform](https://www.hackerone.com/)
 - [TryHackMe](https://tryhackme.com/)
 - [Hack The Box](https://www.hackthebox.com/)
+- [PentesterLab](https://pentesterlab.com/)
 
 
 ## Disclaimer
 
-This repository is strictly for educational purposes. Any misuse of the content for malicious activities is strictly prohibited. Always obtain proper authorization before performing security testing.
+*This repository is strictly for educational purposes. Any misuse of the content for malicious activities is strictly prohibited. Always obtain proper authorization before performing security testing.*
 
 ---
