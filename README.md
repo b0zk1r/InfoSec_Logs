@@ -7,73 +7,73 @@ This repository serves as a collection of resources, notes, and hands-on exercis
 
 - **Assessment Methodologies**
   - *Auditing Fundamentals*
-     Audit Guide
-    -Basics
-    -Compliance
-    -Frameworks
-    -Nessus & NMAP
-    -SCAP & STIG
+    - Audit Guide
+    - Basics
+    - Compliance
+    - Frameworks
+    - Nessus & NMAP
+    - SCAP & STIG
   - Enumeration
-    -FTP
-    -HTTP
-    -SMB
-    -SQL
-    -SSH
+    - FTP
+    - HTTP
+    - SMB
+    - SQL
+    - SSH
   - Footprinting and Scanning
-    -Network Mapping
+    - Network Mapping
   - Information Gathering
-    -Active
-    -Passive
-    -Types
+    - Active
+    - Passive
+    - Types
   - Vulnerability Assessment
-    -Basics
-    -Case Studies
-      -Eternal Blue
-      -Heartbleed
-      -Log4J
+    - Basics
+    - Case Studies
+      - Eternal Blue
+      - Heartbleed
+      - Log4J
 - **Exploitation**
   - Linux
-    -FTP
-    -Overview
-    -Password Hashes
-    -SAMBA
-    -ShellShock
-    -SSH
-    -Privilege Escalation
-      -Cron Jobs
-      -DirtyCow
-      -Kernel Exploits
-      -SUID Binaries
-  - Windows
-    -Overview
-    - Credential Dumping
-      -Config Files
-      -Mimikatz
-      -Pass-The-Hash
-      -Password Hashes    
-    - Microsoft IIS
-      -Basics
-      -Metasploit
-      -WebDAV
+    - FTP
+    - Overview
+    - Password Hashes
+    - SAMBA
+    - ShellShock
+    - SSH
     - Privilege Escalation
-      -Basics
-      -Exploit Suggester
-      -Metasploit
-      -Token Impersonating
-      -UACMe
+      - Cron Jobs
+      - DirtyCow
+      - Kernel Exploits
+      - SUID Binaries
+  - Windows
+    - Overview
+    - Credential Dumping
+      - Config Files
+      - Mimikatz
+      - Pass-The-Hash
+      - Password Hashes    
+    - Microsoft IIS
+      - Basics
+      - Metasploit
+      - WebDAV
+    - Privilege Escalation
+      - Basics
+      - Exploit Suggester
+      - Metasploit
+      - Token Impersonating
+      - UACMe
     - RDP
-      -Basics
-      -Blue Keep
-      -Exploiting RDP
+      - Basics
+      - Blue Keep
+      - Exploiting RDP
     - SMB
-      -Basics
-      -Eternal Blue
-      -PsExec
+      - Basics
+      - Eternal Blue
+      - PsExec
     - Windows File System
-      -Alternate Data Streams
+      - Alternate Data Streams
     - WinRM
-      -Basics
-      -Exploiting WinRM
+      - Basics
+      - Exploiting WinRM
 - **Web Application Security**
   - OWASP Top 10 Vulnerabilities
   - SQL Injection, XSS, CSRF, and More
