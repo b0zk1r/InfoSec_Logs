@@ -7,7 +7,7 @@ This repository serves as a collection of resources, notes, and hands-on exercis
 
 - **Assessment Methodologies**
   - *Auditing Fundamentals*
-    -Audit Guide
+     Audit Guide
     -Basics
     -Compliance
     -Frameworks
