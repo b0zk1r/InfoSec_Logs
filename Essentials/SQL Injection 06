@@ -1,0 +1,16 @@
+SQL Injection 06
+
+\xBF'
+%bf%27
+
+
+
+
+
+This example was first published in 2006 on Chris Shiflett's Blog as a way to bypass addslashes. It relies on the way MySQL will perform escaping. It will depend on the charset used by the connection. If the database driver is not aware of the charset used it will not perform the right escaping and create an exploitable situation. This exploit relies on the usage of GBK. GBK is a character set for simplified Chinese. Using the fact that the database driver and the database don't "talk" the same charset, it's possible to generate a single quote and break out of the SQL syntax to inject a payload.
+Using the string \xBF' (URL-encoded as %bf%27), it's possible to get a single quote that will not get escaped properly. It's therefore possible to inject an always-true condition using %bf%27 or 1=1 -- and bypass the authentication.
+As a side note, this issue can be remediated by setting up the connection encoding to 'GBK' instead of using an SQL query (which is the source of this issue). Here the problem comes from the execution of the following query:
+	
+	SET CHARACTER SET 'GBK';
+
+It is a pretty unlikely issue for a web application but it's always good to know that it exists, especially if you play CTFs.

@@ -1,0 +1,30 @@
+SSRF 01
+
+SERVER SIDE REQUEST FORGERY
+A Server Side Request Forgery vulnerability allows an attacker to use a functionality of the web application to gain access to internal resources. Basically, we are going to get the server to make HTTP requests (or over protocols) on our behalf.
+
+This can be used to access internal pages, perform network scans, trigger behaviours in different systems...
+
+Here we will just try to retrieve the content of the webroot of a server listening on port TCP/1234. We can't access the service directly but we can get the vulnerable server to do it for us. To do so you will need to change the url parameter to access the local server on port TCP/1234.
+
+
+
+
+SSRF 02
+
+In this example, the developer blocked the previous attack by blocking 127.0.0.1`\. However, that's the only thing that is blocked. You should be able to find an alias for it.
+
+
+
+SSRF 03
+
+In this example, the developer blocked the previous attack by blocking 127.0.0.1 and localhost. Maybe you can find an equivalent for 127.0.0.1.
+
+
+
+SSRF 04
+
+In this example, the developer blocked everything that doesn't match assets.pentesterlab.com. However, the regular expression seems a bit weak.
+
+We setup a special DNS zone that will always answer 127.0.0.1 for any host in the domain hackingwithpentesterlab.link. That will probably help you.
+

@@ -1,0 +1,14 @@
+Open Redirect 01
+
+Open Redirect vulnerabilities allows you to redirect the victim to a malicious website. They are low impact vulnerabilities in most cases unless you can use them to leak Oauth tokens.
+
+In this challenge, you should be able to redirect the victim to a website you control (or webhook.site). Once the victim visit your page, you will get the key to score in the User-Agent. You can then submit the key.
+
+Here it's an trivial openredirect, you can just put any URL to get the victim to your website.
+
+
+
+Open Redirect 02
+
+
+In this challenge, the redirect URL needs to start with /. The developer made the assumption that only a path/URI can start with /. However, it's possible to bypass this mechanism by using //. For this challenge, you may want to use another site than webhook.site as they don't automatically redirect http:// to https://. Otherwise, you can use the https:// URL for this exercise.

